@@ -40,13 +40,19 @@ android {
 
 dependencies {
 
+    // Kotlin
+    implementation(Libs.KOTLIN_STDLIB)
+
+    implementation(Libs.ACTIVITY_KTX)
+    implementation(Libs.FRAGMENT_KTX)
     implementation(Libs.CORE_KTX)
     implementation(Libs.APPCOMPAT)
     implementation(Libs.CONSTRAINT_LAYOUT)
 
     // Architecture Components
+    implementation(Libs.LIFECYCLE_EXTENSIONS)
+    implementation(Libs.LIFECYCLE_VIEW_MODEL_KTX)
     implementation(Libs.LIFECYCLE_LIVE_DATA_KTX)
-    implementation(Libs.LIFECYCLE_RUNTIME_KTX)
     kapt(Libs.LIFECYCLE_COMPILER)
 
     implementation(Libs.MATERIAL)
@@ -61,8 +67,17 @@ dependencies {
     implementation(Libs.GLIDE)
     kapt(Libs.GLIDE_COMPILER)
 
-    // Kotlin
-    implementation(Libs.KOTLIN_STDLIB)
+    //Network
+    implementation(Libs.RETROFIT)
+    implementation(Libs.RETROFIT_MOSHI)
+
+    //Moshi
+    // moshi
+    implementation(Libs.MOSHI)
+    implementation(Libs.MOSHI_CODEGEN)
+
+    //Coroutines
+    implementation(Libs.COROUTINES)
 
     testImplementation(Libs.JUNIT)
     testImplementation(Libs.MOCKITO_CORE)
