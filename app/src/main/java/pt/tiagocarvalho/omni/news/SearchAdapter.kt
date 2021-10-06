@@ -33,8 +33,37 @@ internal class SearchAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(news: News, onItemClicked: (News) -> Unit) {
+            when (calculateViewType(news)) {
+                VIEW_LARGE -> bindLayoutLarge(binding, news)
+                VIEW_MEDIUM -> bindLayoutMedium(binding, news)
+                VIEW_SMALL -> bindLayoutSmall(binding, news)
+            }
+
+            binding.root.setOnClickListener {
+                when (calculateNextViewType(binding)) {
+                    VIEW_LARGE -> bindLayoutLarge(binding, news)
+                    VIEW_MEDIUM -> bindLayoutMedium(binding, news)
+                    VIEW_SMALL -> bindLayoutSmall(binding, news)
+                }
+            }
+        }
+
+        private fun bindLayoutSmall(binding: ItemNewsBinding, news: News) {
             with(binding) {
-                title.text = news.title
+                layoutLarge.root.isVisible = false
+                layoutMedium.root.isVisible = false
+                layoutSmall.root.isVisible = true
+                layoutSmall.titleSmall.text = news.title
+            }
+        }
+
+        private fun bindLayoutMedium(binding: ItemNewsBinding, news: News) {
+            with(binding) {
+                layoutLarge.root.isVisible = false
+                layoutMedium.root.isVisible = false
+                layoutSmall.titleSmall.isVisible = true
+
+                layoutMedium.titleMedium.text = news.title
 
                 val listener = object : RequestListener<Drawable> {
                     override fun onLoadFailed(
@@ -43,7 +72,7 @@ internal class SearchAdapter(
                         target: Target<Drawable>?,
                         isFirstResource: Boolean
                     ): Boolean {
-                        image.isVisible = false
+                        layoutMedium.imageMedium.isVisible = false
                         return false
                     }
 
@@ -58,11 +87,60 @@ internal class SearchAdapter(
                     }
                 }
 
-                GlideApp.with(binding.root.context)
+                GlideApp.with(this.root.context)
                     .load(news.imageUrl)
                     .centerCrop()
                     .listener(listener)
-                    .into(image)
+                    .into(layoutMedium.imageMedium)
+            }
+        }
+
+        private fun bindLayoutLarge(binding: ItemNewsBinding, news: News) {
+            with(binding) {
+                layoutLarge.root.isVisible = true
+                layoutMedium.root.isVisible = false
+                layoutSmall.root.isVisible = false
+                layoutLarge.titleLarge.text = news.title
+
+                val listener = object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        layoutLarge.imageLarge.isVisible = false
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        return false
+                    }
+                }
+
+                GlideApp.with(this.root.context)
+                    .load(news.imageUrl)
+                    .centerCrop()
+                    .listener(listener)
+                    .into(layoutLarge.imageLarge)
+            }
+        }
+
+        private fun calculateViewType(news: News): Int {
+            return news.id.hashCode() % 3
+        }
+
+        private fun calculateNextViewType(binding: ItemNewsBinding): Int {
+            return when {
+                binding.layoutLarge.root.isVisible -> VIEW_MEDIUM
+                binding.layoutMedium.root.isVisible -> VIEW_SMALL
+                else -> VIEW_LARGE
             }
         }
     }
@@ -76,5 +154,9 @@ internal class SearchAdapter(
             override fun areContentsTheSame(oldItem: News, newItem: News) =
                 oldItem == newItem
         }
+
+        private const val VIEW_LARGE = 0
+        private const val VIEW_MEDIUM = 1
+        private const val VIEW_SMALL = 2
     }
 }
