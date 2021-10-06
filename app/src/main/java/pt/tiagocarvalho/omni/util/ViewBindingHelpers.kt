@@ -1,4 +1,4 @@
-package pt.tiagocarvalho.skeleton.util
+package pt.tiagocarvalho.omni.util
 
 import android.view.LayoutInflater
 import android.view.View

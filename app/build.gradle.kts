@@ -77,6 +77,7 @@ dependencies {
     // Network
     implementation(Libs.RETROFIT)
     implementation(Libs.RETROFIT_GSON)
+    implementation(Libs.RETROFIT_INTERCEPTOR)
 
     // Coroutines
     implementation(Libs.COROUTINES_CORE)

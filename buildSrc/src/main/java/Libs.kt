@@ -25,5 +25,5 @@ object Libs {
     const val MOCKITO_KOTLIN = "com.nhaarman:mockito-kotlin:1.6.0"
     const val RETROFIT = "com.squareup.retrofit2:retrofit:2.9.0"
     const val RETROFIT_GSON = "com.squareup.retrofit2:converter-gson:2.4.0"
-
+    const val RETROFIT_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:3.8.0"
 }

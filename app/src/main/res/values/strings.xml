@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">OmniExercise</string>
+
+
+    <!--Search -->
+    <string name="search_placeholder">Search Term</string>
+    <string name="search_filter_topics">Topics</string>
+    <string name="search_filter_articles">Articles</string>
+
+
 </resources>
