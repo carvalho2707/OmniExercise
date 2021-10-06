@@ -1,14 +1,13 @@
-package pt.tiagocarvalho.omni.example
+package pt.tiagocarvalho.skeleton.example
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import pt.tiagocarvalho.omni.R
 import pt.tiagocarvalho.omni.databinding.ExampleFragmentBinding
-import pt.tiagocarvalho.omni.util.viewBinding
+import pt.tiagocarvalho.skeleton.util.viewBinding
 
 @AndroidEntryPoint
 class ExampleFragment : Fragment(R.layout.example_fragment) {

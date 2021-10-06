@@ -1,4 +1,4 @@
-package pt.tiagocarvalho.omni
+package pt.tiagocarvalho.skeleton
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

@@ -1,4 +1,4 @@
-package pt.tiagocarvalho.omni.example
+package pt.tiagocarvalho.skeleton.example
 
 data class Example(
     val image: String?,

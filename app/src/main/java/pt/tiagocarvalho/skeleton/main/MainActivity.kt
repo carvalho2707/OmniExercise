@@ -1,4 +1,4 @@
-package pt.tiagocarvalho.omni.main
+package pt.tiagocarvalho.skeleton.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import pt.tiagocarvalho.omni.R
 import pt.tiagocarvalho.omni.databinding.ActivityMainBinding
-import pt.tiagocarvalho.omni.example.ExampleFragment
+import pt.tiagocarvalho.skeleton.example.ExampleFragment
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {

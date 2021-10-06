@@ -1,4 +1,4 @@
-package pt.tiagocarvalho.omni.main
+package pt.tiagocarvalho.skeleton.main
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

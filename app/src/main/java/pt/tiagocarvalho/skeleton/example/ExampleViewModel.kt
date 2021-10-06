@@ -1,4 +1,4 @@
-package pt.tiagocarvalho.omni.example
+package pt.tiagocarvalho.skeleton.example
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
