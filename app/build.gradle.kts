@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Versions.COMPILE_SDK)
+    compileSdk = Versions.COMPILE_SDK
 
     defaultConfig {
         applicationId = "pt.tiagocarvalho.omni"
-        minSdkVersion(Versions.MIN_SDK)
-        targetSdkVersion(Versions.TARGET_SDK)
+        minSdk = Versions.MIN_SDK
+        targetSdk = Versions.TARGET_SDK
         versionCode = Versions.versionCode
         versionName = Versions.versionName
 
@@ -35,10 +35,16 @@ android {
     kotlinOptions {
         val options = this as org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
         options.jvmTarget = "1.8"
+        jvmTarget = "1.8"
+    }
+
+    packagingOptions {
+        exclude("META-INF/*.kotlin_module")
     }
 }
 
 dependencies {
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     // Kotlin
     implementation(Libs.KOTLIN_STDLIB)
@@ -51,6 +57,7 @@ dependencies {
 
     // Architecture Components
     implementation(Libs.LIFECYCLE_EXTENSIONS)
+    implementation(Libs.LIFECYCLE_COMMON)
     implementation(Libs.LIFECYCLE_VIEW_MODEL_KTX)
     implementation(Libs.LIFECYCLE_LIVE_DATA_KTX)
     kapt(Libs.LIFECYCLE_COMPILER)
@@ -67,17 +74,13 @@ dependencies {
     implementation(Libs.GLIDE)
     kapt(Libs.GLIDE_COMPILER)
 
-    //Network
+    // Network
     implementation(Libs.RETROFIT)
-    implementation(Libs.RETROFIT_MOSHI)
+    implementation(Libs.RETROFIT_GSON)
 
-    //Moshi
-    // moshi
-    implementation(Libs.MOSHI)
-    implementation(Libs.MOSHI_CODEGEN)
-
-    //Coroutines
-    implementation(Libs.COROUTINES)
+    // Coroutines
+    implementation(Libs.COROUTINES_CORE)
+    implementation(Libs.COROUTINES_ANDROID)
 
     testImplementation(Libs.JUNIT)
     testImplementation(Libs.MOCKITO_CORE)

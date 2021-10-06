@@ -11,19 +11,19 @@ import pt.tiagocarvalho.omni.example.ExampleFragment
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-  private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
 
-  private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    binding = ActivityMainBinding.inflate(layoutInflater)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-    navigateToExample()
-  }
+        navigateToExample()
+    }
 
-  private fun navigateToExample() {
-    val fragment = ExampleFragment.newInstance()
-    supportFragmentManager.beginTransaction().add(R.id.container, fragment).commit()
-  }
+    private fun navigateToExample() {
+        val fragment = ExampleFragment.newInstance()
+        supportFragmentManager.beginTransaction().add(R.id.container, fragment).commit()
+    }
 }

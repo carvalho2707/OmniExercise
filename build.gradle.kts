@@ -8,8 +8,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.0.2")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31")
+        classpath("com.android.tools.build:gradle:${Versions.ANDROID_GRADLE}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN_GRADLE_PLUGIN}")
         classpath("com.google.dagger:hilt-android-gradle-plugin:${Versions.HILT_AGP}")
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -26,5 +26,27 @@ allprojects {
         google()
         mavenCentral()
         jcenter()
+    }
+}
+
+
+subprojects {
+    apply(plugin = "com.diffplug.gradle.spotless")
+    val ktlintVer = "0.40.0"
+    spotless {
+        kotlin {
+            target("**/*.kt")
+            ktlint(ktlintVer)
+        }
+        kotlinGradle {
+            // same as kotlin, but for .gradle.kts files (defaults to '*.gradle.kts')
+            target("**/*.gradle.kts")
+            ktlint(ktlintVer)
+        }
+    }
+
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        kotlinOptions.freeCompilerArgs +=
+            "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi"
     }
 }

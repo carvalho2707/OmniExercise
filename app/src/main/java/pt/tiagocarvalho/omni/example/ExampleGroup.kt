@@ -1,21 +1,18 @@
 package pt.tiagocarvalho.omni.example
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 
-@JsonClass(generateAdapter = true)
 data class ExampleGroup(
-  @Json(name = "status") val status: String,
-  @Json(name = "totalResults") val totalResults: Int,
-  @Json(name = "articles") val articles: List<ExampleResponse>,
+    @SerializedName("status") val status: String,
+    @SerializedName("totalResults") val totalResults: Int,
+    @SerializedName("articles") val articles: List<ExampleResponse>,
 )
 
-@JsonClass(generateAdapter = true)
 data class ExampleResponse(
-  @Json(name = "author") val author: String?,
-  @Json(name = "description") val description: String?,
-  @Json(name = "url") val url: String?,
-  @Json(name = "urlToImage") val urlToImage: String?,
-  @Json(name = "publishedAt") val publishedAt: String?,
-  @Json(name = "content") val content: String?,
+    @SerializedName("author") val author: String?,
+    @SerializedName("description") val description: String?,
+    @SerializedName("url") val url: String?,
+    @SerializedName("urlToImage") val urlToImage: String?,
+    @SerializedName("publishedAt") val publishedAt: String?,
+    @SerializedName("content") val content: String?,
 )
