@@ -19,8 +19,8 @@ class SearchViewModel @Inject constructor(
     val news: LiveData<List<News>>
         get() = _news
 
-    private val _error = MutableLiveData<Boolean>()
-    val error: LiveData<Boolean>
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
         get() = _error
 
     fun search(searchTerm: String, checked: Boolean) {
@@ -35,8 +35,12 @@ class SearchViewModel @Inject constructor(
             searchUseCase(searchTerm, searchFilter)
                 .fold(
                     { _news.value = it },
-                    { _error.value = true }
+                    { _error.value = it.message ?: UNKNOWN_ERROR }
                 )
         }
+    }
+
+    companion object {
+        private const val UNKNOWN_ERROR = "An error as occurred."
     }
 }

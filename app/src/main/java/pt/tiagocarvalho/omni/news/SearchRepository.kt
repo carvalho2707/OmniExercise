@@ -22,7 +22,7 @@ class SearchRepository @Inject constructor(
     }
 
     private fun ArticleResponse.toDomainModel(): News {
-        return News(
+        return News.Article(
             id = this.articleId,
             imageUrl = createImageUrl(this.mainResource?.imageAsset?.id),
             title = this.title.value
@@ -30,9 +30,8 @@ class SearchRepository @Inject constructor(
     }
 
     private fun TopicResponse.toDomainModel(): News {
-        return News(
+        return News.Topic(
             id = this.topicId,
-            imageUrl = null,
             title = this.title
         )
     }

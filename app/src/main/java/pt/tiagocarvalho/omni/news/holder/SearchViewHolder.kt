@@ -16,22 +16,20 @@ import kotlin.math.abs
 class SearchViewHolder(private val binding: ItemNewsBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(news: News, onItemClicked: (News) -> Unit) {
-        val viewType = calculateViewType(news)
-        print(viewType)
-        when (viewType) {
+    fun bind(news: News) {
+        when (calculateViewType(news)) {
             VIEW_LARGE -> bindLayoutLarge(binding, news)
             VIEW_MEDIUM -> bindLayoutMedium(binding, news)
             VIEW_SMALL -> bindLayoutSmall(binding, news)
         }
 
-        binding.root.setOnClickListener {
-            val nextViewType = calculateNextViewType(binding)
-            print("Next ViewType: $nextViewType")
-            when (nextViewType) {
-                VIEW_LARGE -> bindLayoutLarge(binding, news)
-                VIEW_MEDIUM -> bindLayoutMedium(binding, news)
-                VIEW_SMALL -> bindLayoutSmall(binding, news)
+        if (news is News.Article) {
+            binding.root.setOnClickListener {
+                when (calculateNextViewType(binding)) {
+                    VIEW_LARGE -> bindLayoutLarge(binding, news)
+                    VIEW_MEDIUM -> bindLayoutMedium(binding, news)
+                    VIEW_SMALL -> bindLayoutSmall(binding, news)
+                }
             }
         }
     }
@@ -53,7 +51,9 @@ class SearchViewHolder(private val binding: ItemNewsBinding) :
             layoutSmall.root.isVisible = false
 
             layoutMedium.title.text = news.title
-            loadImage(this, news.imageUrl, layoutMedium.image)
+            if (news is News.Article) {
+                loadImage(this, news.imageUrl, layoutMedium.image)
+            }
         }
     }
 
@@ -64,12 +64,18 @@ class SearchViewHolder(private val binding: ItemNewsBinding) :
             layoutSmall.root.isVisible = false
 
             layoutLarge.title.text = news.title
-            loadImage(this, news.imageUrl, layoutLarge.image)
+            if (news is News.Article) {
+                loadImage(this, news.imageUrl, layoutLarge.image)
+            }
         }
     }
 
     private fun calculateViewType(news: News): Int {
-        return abs(news.id.hashCode() % 3)
+        return if (news is News.Topic) {
+            VIEW_SMALL
+        } else {
+            abs(news.id.hashCode() % 3)
+        }
     }
 
     private fun calculateNextViewType(binding: ItemNewsBinding): Int {

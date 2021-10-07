@@ -84,6 +84,8 @@ dependencies {
     implementation(Libs.COROUTINES_ANDROID)
 
     testImplementation(Libs.JUNIT)
+    testImplementation(Libs.CORE_TESTING)
+    testImplementation(Libs.COROUTINES_TEST)
     testImplementation(Libs.MOCKK)
     testImplementation(Libs.MOCKITO_CORE)
     testImplementation(Libs.MOCKITO_KOTLIN)

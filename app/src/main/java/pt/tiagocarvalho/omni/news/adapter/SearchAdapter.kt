@@ -9,9 +9,7 @@ import pt.tiagocarvalho.omni.databinding.ItemNewsBinding
 import pt.tiagocarvalho.omni.news.News
 import pt.tiagocarvalho.omni.news.holder.SearchViewHolder
 
-internal class SearchAdapter(
-    private val onItemClicked: (News) -> Unit
-) : ListAdapter<News, SearchViewHolder>(DIFF_CALLBACK) {
+internal class SearchAdapter : ListAdapter<News, SearchViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val view = ItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -19,7 +17,7 @@ internal class SearchAdapter(
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(getItem(position), onItemClicked)
+        holder.bind(getItem(position))
     }
 
     companion object {

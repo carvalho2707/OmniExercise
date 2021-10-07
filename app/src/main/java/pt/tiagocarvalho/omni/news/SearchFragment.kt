@@ -21,7 +21,7 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
 
     private val viewModel: SearchViewModel by viewModels()
 
-    private val searchAdapter by lazy { SearchAdapter(this::onNewsClicked) }
+    private val searchAdapter by lazy { SearchAdapter() }
 
     private val binding: SearchFragmentBinding by viewBinding(SearchFragmentBinding::bind)
 
@@ -82,9 +82,6 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
 
     private fun setupNews() {
         viewModel.search("stockholm", binding.filter.isChecked)
-    }
-
-    private fun onNewsClicked(news: News) {
     }
 
     private fun onSuccess(news: List<News>) {
