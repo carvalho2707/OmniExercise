@@ -21,6 +21,7 @@ object Libs {
     const val LIFECYCLE_LIVE_DATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     const val LIFECYCLE_VIEW_MODEL_KTX = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     const val MATERIAL = "com.google.android.material:material:1.4.0"
+    const val MOCKK = "io.mockk:mockk:1.12.0"
     const val MOCKITO_CORE = "org.mockito:mockito-core:3.12.4"
     const val MOCKITO_KOTLIN = "com.nhaarman:mockito-kotlin:1.6.0"
     const val RETROFIT = "com.squareup.retrofit2:retrofit:2.9.0"
