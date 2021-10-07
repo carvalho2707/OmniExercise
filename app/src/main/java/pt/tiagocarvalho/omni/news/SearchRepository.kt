@@ -1,16 +1,23 @@
 package pt.tiagocarvalho.omni.news
 
+import pt.tiagocarvalho.omni.model.Error
+import pt.tiagocarvalho.omni.model.Result
 import javax.inject.Inject
 
 class SearchRepository @Inject constructor(
     private val searchService: SearchService
 ) {
 
-    suspend fun search(term: String, searchFilter: SearchFilter): List<News> {
-        val searchResponse = searchService.search(term)
-        return when (searchFilter) {
-            SearchFilter.ARTICLES -> searchResponse.articles.map { it.toDomainModel() }
-            SearchFilter.TOPICS -> searchResponse.topics.map { it.toDomainModel() }
+    suspend fun search(term: String, searchFilter: SearchFilter): Result<List<News>, Error> {
+        return try {
+            val searchResponse = searchService.search(term)
+            val news = when (searchFilter) {
+                SearchFilter.ARTICLES -> searchResponse.articles.map { it.toDomainModel() }
+                SearchFilter.TOPICS -> searchResponse.topics.map { it.toDomainModel() }
+            }
+            Result.Success(news)
+        } catch (e: Exception) {
+            Result.Failure(Error(e.message))
         }
     }
 
@@ -25,7 +32,7 @@ class SearchRepository @Inject constructor(
     private fun TopicResponse.toDomainModel(): News {
         return News(
             id = this.topicId,
-            imageUrl = createImageUrl(this.image?.imageAsset?.id),
+            imageUrl = null,
             title = this.title
         )
     }

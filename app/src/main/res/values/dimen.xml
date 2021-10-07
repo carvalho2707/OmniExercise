@@ -4,7 +4,8 @@
     <!--Search -->
     <dimen name="search_horizontal_margin">16dp</dimen>
     <dimen name="search_horizontal_small_margin">4dp</dimen>
-    <dimen name="search_vertical_margin">8dp</dimen>
+    <dimen name="search_vertical_margin">16dp</dimen>
+    <dimen name="search_title_vertical_margin">8dp</dimen>
     <dimen name="search_filter_desc_margin">4dp</dimen>
 
 </resources>

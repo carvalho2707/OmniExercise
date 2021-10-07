@@ -6,6 +6,7 @@
     <string name="search_placeholder">Search Term</string>
     <string name="search_filter_topics">Topics</string>
     <string name="search_filter_articles">Articles</string>
+    <string name="search_error">An error has occurred</string>
 
 
 </resources>

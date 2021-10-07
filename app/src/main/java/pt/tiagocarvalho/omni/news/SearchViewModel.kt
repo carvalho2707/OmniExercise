@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import pt.tiagocarvalho.omni.model.fold
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,6 +18,10 @@ class SearchViewModel @Inject constructor(
     val news: LiveData<List<News>>
         get() = _news
 
+    private val _error = MutableLiveData<Boolean>()
+    val error: LiveData<Boolean>
+        get() = _error
+
     fun search(term: String, checked: Boolean) {
         val searchFilter = if (checked) {
             SearchFilter.TOPICS
@@ -25,7 +30,10 @@ class SearchViewModel @Inject constructor(
         }
         viewModelScope.launch {
             searchUseCase(term, searchFilter)
-                .also { _news.value = it }
+                .fold(
+                    { _news.value = it },
+                    { _error.value = true }
+                )
         }
     }
 }

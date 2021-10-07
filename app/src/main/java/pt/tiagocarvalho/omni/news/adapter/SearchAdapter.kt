@@ -1,9 +1,10 @@
-package pt.tiagocarvalho.omni.news
+package pt.tiagocarvalho.omni.news.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -14,6 +15,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import pt.tiagocarvalho.omni.GlideApp
 import pt.tiagocarvalho.omni.databinding.ItemNewsBinding
+import pt.tiagocarvalho.omni.news.News
+import kotlin.math.abs
 
 internal class SearchAdapter(
     private val onItemClicked: (News) -> Unit
@@ -68,35 +71,8 @@ internal class SearchAdapter(
                 layoutMedium.root.isVisible = true
                 layoutSmall.root.isVisible = false
 
-                layoutMedium.titleMedium.text = news.title
-
-                val listener = object : RequestListener<Drawable> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        layoutMedium.imageMedium.isVisible = false
-                        return false
-                    }
-
-                    override fun onResourceReady(
-                        resource: Drawable?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        return false
-                    }
-                }
-
-                GlideApp.with(this.root.context)
-                    .load(news.imageUrl)
-                    .centerCrop()
-                    .listener(listener)
-                    .into(layoutMedium.imageMedium)
+                layoutMedium.title.text = news.title
+                loadImage(this, news.imageUrl, layoutMedium.image)
             }
         }
 
@@ -106,8 +82,25 @@ internal class SearchAdapter(
                 layoutMedium.root.isVisible = false
                 layoutSmall.root.isVisible = false
 
-                layoutLarge.titleLarge.text = news.title
+                layoutLarge.title.text = news.title
+                loadImage(this, news.imageUrl, layoutLarge.image)
+            }
+        }
 
+        private fun calculateViewType(news: News): Int {
+            return abs(news.id.hashCode() % 3)
+        }
+
+        private fun calculateNextViewType(binding: ItemNewsBinding): Int {
+            return when {
+                binding.layoutLarge.root.isVisible -> VIEW_MEDIUM
+                binding.layoutMedium.root.isVisible -> VIEW_SMALL
+                else -> VIEW_LARGE
+            }
+        }
+
+        private fun loadImage(binding: ItemNewsBinding, url: String?, view: ImageView) {
+            with(binding) {
                 val listener = object : RequestListener<Drawable> {
                     override fun onLoadFailed(
                         e: GlideException?,
@@ -115,7 +108,7 @@ internal class SearchAdapter(
                         target: Target<Drawable>?,
                         isFirstResource: Boolean
                     ): Boolean {
-                        layoutLarge.imageLarge.isVisible = false
+                        view.isVisible = false
                         return false
                     }
 
@@ -126,27 +119,16 @@ internal class SearchAdapter(
                         dataSource: DataSource?,
                         isFirstResource: Boolean
                     ): Boolean {
+                        view.isVisible = true
                         return false
                     }
                 }
 
                 GlideApp.with(this.root.context)
-                    .load(news.imageUrl)
+                    .load(url)
                     .centerCrop()
                     .listener(listener)
-                    .into(layoutLarge.imageLarge)
-            }
-        }
-
-        private fun calculateViewType(news: News): Int {
-            return news.id.hashCode() % 3
-        }
-
-        private fun calculateNextViewType(binding: ItemNewsBinding): Int {
-            return when {
-                binding.layoutLarge.root.isVisible -> VIEW_MEDIUM
-                binding.layoutMedium.root.isVisible -> VIEW_SMALL
-                else -> VIEW_LARGE
+                    .into(view)
             }
         }
     }
