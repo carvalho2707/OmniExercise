@@ -33,14 +33,18 @@ internal class SearchAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(news: News, onItemClicked: (News) -> Unit) {
-            when (calculateViewType(news)) {
+            val viewType = calculateViewType(news)
+            print(viewType)
+            when (viewType) {
                 VIEW_LARGE -> bindLayoutLarge(binding, news)
                 VIEW_MEDIUM -> bindLayoutMedium(binding, news)
                 VIEW_SMALL -> bindLayoutSmall(binding, news)
             }
 
             binding.root.setOnClickListener {
-                when (calculateNextViewType(binding)) {
+                val nextViewType = calculateNextViewType(binding)
+                print("Next ViewType: $nextViewType")
+                when (nextViewType) {
                     VIEW_LARGE -> bindLayoutLarge(binding, news)
                     VIEW_MEDIUM -> bindLayoutMedium(binding, news)
                     VIEW_SMALL -> bindLayoutSmall(binding, news)
@@ -53,6 +57,7 @@ internal class SearchAdapter(
                 layoutLarge.root.isVisible = false
                 layoutMedium.root.isVisible = false
                 layoutSmall.root.isVisible = true
+
                 layoutSmall.titleSmall.text = news.title
             }
         }
@@ -60,8 +65,8 @@ internal class SearchAdapter(
         private fun bindLayoutMedium(binding: ItemNewsBinding, news: News) {
             with(binding) {
                 layoutLarge.root.isVisible = false
-                layoutMedium.root.isVisible = false
-                layoutSmall.titleSmall.isVisible = true
+                layoutMedium.root.isVisible = true
+                layoutSmall.root.isVisible = false
 
                 layoutMedium.titleMedium.text = news.title
 
@@ -100,6 +105,7 @@ internal class SearchAdapter(
                 layoutLarge.root.isVisible = true
                 layoutMedium.root.isVisible = false
                 layoutSmall.root.isVisible = false
+
                 layoutLarge.titleLarge.text = news.title
 
                 val listener = object : RequestListener<Drawable> {

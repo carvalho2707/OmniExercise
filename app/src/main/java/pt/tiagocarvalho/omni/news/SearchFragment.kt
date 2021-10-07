@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import pt.tiagocarvalho.omni.R
 import pt.tiagocarvalho.omni.databinding.SearchFragmentBinding
 import pt.tiagocarvalho.omni.util.viewBinding
+
 
 @AndroidEntryPoint
 class SearchFragment : Fragment(R.layout.search_fragment) {
@@ -61,8 +64,13 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
                 }
             })
 
+            val mDividerItemDecoration = DividerItemDecoration(
+                requireContext(),
+                LinearLayout.VERTICAL
+            )
             val layoutManager = LinearLayoutManager(context)
             news.layoutManager = layoutManager
+            news.addItemDecoration(mDividerItemDecoration)
             news.adapter = searchAdapter
         }
     }
