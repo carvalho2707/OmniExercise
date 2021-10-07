@@ -15,8 +15,6 @@ class SearchViewModel @Inject constructor(
     private val searchUseCase: SearchUseCase
 ) : ViewModel() {
 
-    private var searchTermCache = ""
-
     private val _news = MutableLiveData(emptyList<News>())
     val news: LiveData<List<News>>
         get() = _news
@@ -32,16 +30,8 @@ class SearchViewModel @Inject constructor(
             SearchFilter.ARTICLES
         }
 
-        if (searchTerm == searchTermCache) {
-            return
-        }
-
-        searchTermCache = searchTerm
-
         viewModelScope.launch {
             delay(300)
-            if (searchTerm != searchTermCache)
-                return@launch
             searchUseCase(searchTerm, searchFilter)
                 .fold(
                     { _news.value = it },
