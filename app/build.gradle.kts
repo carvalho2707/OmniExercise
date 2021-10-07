@@ -77,12 +77,16 @@ dependencies {
     // Network
     implementation(Libs.RETROFIT)
     implementation(Libs.RETROFIT_GSON)
+    implementation(Libs.RETROFIT_INTERCEPTOR)
 
     // Coroutines
     implementation(Libs.COROUTINES_CORE)
     implementation(Libs.COROUTINES_ANDROID)
 
     testImplementation(Libs.JUNIT)
+    testImplementation(Libs.CORE_TESTING)
+    testImplementation(Libs.COROUTINES_TEST)
+    testImplementation(Libs.MOCKK)
     testImplementation(Libs.MOCKITO_CORE)
     testImplementation(Libs.MOCKITO_KOTLIN)
 

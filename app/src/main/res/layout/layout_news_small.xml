@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:paddingBottom="@dimen/search_vertical_margin">
 
     <TextView
-        android:id="@+id/content"
-        android:layout_width="match_parent"
+        android:id="@+id/title_small"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/search_horizontal_margin"
+        android:layout_marginTop="@dimen/search_vertical_margin"
+        android:layout_marginEnd="@dimen/search_horizontal_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

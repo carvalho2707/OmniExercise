@@ -4,7 +4,9 @@ object Libs {
     const val APPCOMPAT = "androidx.appcompat:appcompat:1.3.1"
     const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:2.1.1"
     const val CORE_KTX = "androidx.core:core-ktx:1.6.0"
+    const val CORE_TESTING = "androidx.arch.core:core-testing:2.1.0"
     const val COROUTINES_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1"
+    const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1"
     const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1"
     const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:1.3.6"
     const val GLIDE = "com.github.bumptech.glide:glide:4.12.0"
@@ -21,9 +23,10 @@ object Libs {
     const val LIFECYCLE_LIVE_DATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     const val LIFECYCLE_VIEW_MODEL_KTX = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     const val MATERIAL = "com.google.android.material:material:1.4.0"
+    const val MOCKK = "io.mockk:mockk:1.12.0"
     const val MOCKITO_CORE = "org.mockito:mockito-core:3.12.4"
     const val MOCKITO_KOTLIN = "com.nhaarman:mockito-kotlin:1.6.0"
     const val RETROFIT = "com.squareup.retrofit2:retrofit:2.9.0"
     const val RETROFIT_GSON = "com.squareup.retrofit2:converter-gson:2.4.0"
-
+    const val RETROFIT_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:3.8.0"
 }
