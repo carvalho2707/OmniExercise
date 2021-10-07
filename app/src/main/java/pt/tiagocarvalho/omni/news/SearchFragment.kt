@@ -16,7 +16,6 @@ import pt.tiagocarvalho.omni.databinding.SearchFragmentBinding
 import pt.tiagocarvalho.omni.news.adapter.SearchAdapter
 import pt.tiagocarvalho.omni.util.viewBinding
 
-
 @AndroidEntryPoint
 class SearchFragment : Fragment(R.layout.search_fragment) {
 
