@@ -17,6 +17,7 @@ object Libs {
     const val HILT_TESTING = "com.google.dagger:hilt-android-testing:2.39"
     const val JUNIT = "junit:junit:4.13.2"
     const val KOTLIN_STDLIB = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31"
+    const val KOTLIN_JUNIT = "org.jetbrains.kotlin:kotlin-test-junit:1.5.31"
     const val LIFECYCLE_COMPILER = "androidx.lifecycle:lifecycle-compiler:2.2.0"
     const val LIFECYCLE_COMMON = "androidx.lifecycle:lifecycle-common-java8:2.2.0"
     const val LIFECYCLE_EXTENSIONS = "androidx.lifecycle:lifecycle-extensions:2.2.0"

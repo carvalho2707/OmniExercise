@@ -3,10 +3,10 @@ package pt.tiagocarvalho.omni.news
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.Test
 import pt.tiagocarvalho.omni.model.Result
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class SearchUseCaseTest {
 
@@ -23,8 +23,7 @@ class SearchUseCaseTest {
         runBlocking {
             getBingeUseCase("term", SearchFilter.ARTICLES).also {
                 assertTrue(it is Result.Success)
-                val result = it as Result.Success
-                assertEquals(news, result.value)
+                assertEquals(news, it.value)
             }
         }
     }
