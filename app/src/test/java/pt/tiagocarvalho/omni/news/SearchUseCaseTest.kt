@@ -16,7 +16,7 @@ class SearchUseCaseTest {
 
     @Test
     fun `given SearchUseCase should complete`() {
-        val news = listOf(News("id", "imageUrl", "title"))
+        val news = listOf(News.Article("id", "imageUrl", "title"))
 
         coEvery { searchRepository.search(any(), any()) } returns Result.Success(news)
 
