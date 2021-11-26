@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import pt.tiagocarvalho.omni.model.fold
@@ -15,6 +16,10 @@ class SearchViewModel @Inject constructor(
     private val searchUseCase: SearchUseCase
 ) : ViewModel() {
 
+    private var searchJob: Job? = null
+
+    // Should change to State that includes loading, success and failure.
+    // We can remove multiple livedata variables and better handling the logic
     private val _news = MutableLiveData(emptyList<News>())
     val news: LiveData<List<News>>
         get() = _news
@@ -30,8 +35,9 @@ class SearchViewModel @Inject constructor(
             SearchFilter.ARTICLES
         }
 
-        viewModelScope.launch {
-            delay(300)
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            delay(3000)
             searchUseCase(searchTerm, searchFilter)
                 .fold(
                     { _news.value = it },

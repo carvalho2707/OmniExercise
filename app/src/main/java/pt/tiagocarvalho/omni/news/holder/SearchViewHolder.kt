@@ -31,6 +31,8 @@ class SearchViewHolder(private val binding: ItemNewsBinding) :
                     VIEW_SMALL -> bindLayoutSmall(binding, news)
                 }
             }
+        }else{
+            binding.root.setOnClickListener(null)
         }
     }
 

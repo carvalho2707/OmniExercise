@@ -15,16 +15,15 @@ class SearchUseCaseTest {
     private var getBingeUseCase = SearchUseCase(searchRepository)
 
     @Test
-    fun `given SearchUseCase should complete`() {
+    fun `given SearchUseCase should complete`() = runBlocking {
         val news = listOf(News.Article("id", "imageUrl", "title"))
 
         coEvery { searchRepository.search(any(), any()) } returns Result.Success(news)
 
-        runBlocking {
-            getBingeUseCase("term", SearchFilter.ARTICLES).also {
-                assertTrue(it is Result.Success)
-                assertEquals(news, it.value)
-            }
-        }
+        val result = getBingeUseCase("term", SearchFilter.ARTICLES)
+
+        assertTrue(result is Result.Success)
+        assertEquals(news, result.value)
     }
+
 }

@@ -25,9 +25,8 @@ object Libs {
     const val LIFECYCLE_VIEW_MODEL_KTX = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     const val MATERIAL = "com.google.android.material:material:1.4.0"
     const val MOCKK = "io.mockk:mockk:1.12.0"
-    const val MOCKITO_CORE = "org.mockito:mockito-core:3.12.4"
-    const val MOCKITO_KOTLIN = "com.nhaarman:mockito-kotlin:1.6.0"
     const val RETROFIT = "com.squareup.retrofit2:retrofit:2.9.0"
     const val RETROFIT_GSON = "com.squareup.retrofit2:converter-gson:2.4.0"
     const val RETROFIT_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:3.8.0"
+    const val TURBINE = "app.cash.turbine:turbine:0.6.1"
 }

@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("kotlin-android")
 }
 
 android {
@@ -88,6 +89,7 @@ dependencies {
     testImplementation(Libs.CORE_TESTING)
     testImplementation(Libs.COROUTINES_TEST)
     testImplementation(Libs.MOCKK)
+    testImplementation(Libs.TURBINE)
 
     implementation(Libs.GSON)
 }
